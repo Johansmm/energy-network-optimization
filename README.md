@@ -9,29 +9,28 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 <!-- END readme-templates/header.md -->
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Johansmm/energy-network-optimization">
+  <a href="https://github.com/TEAM-IMT/energy-network-optimization">
     <img src="/images/logo.png" alt="Logo">
   </a>
 
   <h2 align="center"><b> Energy Network Optimization </h2></b>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    District Heating Energy Network Optimization, based on ILS, PULP and MIP algorithms
     <br />
-    <a href="https://github.com/Johansmm/energy-network-optimization"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/TEAM-IMT/energy-network-optimization"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Johansmm/energy-network-optimization">View Demo</a>
+    <a href="https://github.com/TEAM-IMT/energy-network-optimization">View Demo</a>
     ·
-    <a href="https://github.com/Johansmm/energy-network-optimization/issues">Report Bug</a>
+    <a href="https://github.com/TEAM-IMT/energy-network-optimization/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Johansmm/energy-network-optimization/issues">Request Feature</a>
+    <a href="https://github.com/TEAM-IMT/energy-network-optimization/issues">Request Feature</a>
   </p>
 </p>
 
@@ -64,32 +63,26 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project  
-<a href="https://github.com/Johansmm/energy-network-optimization"> <img src="/images/screenshot.png"></a>
+In many countries around the world, the ability to heat and supply hot water to buildings is essential, currently, several studies are being carried out in order to determine the most efficient way to do it, one of these is through a Distric heating (DH). A DH is a system for distributing heat generated in a centralized location through a system of insulated pipes for residential and commercial heating requirements such as space heating and water heating in cold areas.
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+This repository seeks to buy the performance of PULP as an optimizer for a mixed integer linear programming (MIP) problem and an Integrated local serch (ILS) designed for a DH, for a specific energy network.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With  
 The main frameworks and libraries used in the project.
 * [python](https://rasa.com/)
-* [networkx](https://networkx.org/)
+* [numpy](https://numpy.org)
+* [scipy](https://www.scipy.org)
 * [matplotlib](https://matplotlib.org/)
-* [opencv](https://opencv.org/)
+* [pandas](https://opencv.org/)
+* [pulp](https://coin-or.github.io)
 
 <!-- GETTING STARTED -->
 ## Getting Started  
 To get a local copy just executed the following command:
 
 ```sh
-git clone https://github.com/Johansmm/energy-network-optimization
+git clone https://github.com/TEAM-IMT/energy-network-optimization
 ```
 
 ### Prerequisites  
@@ -104,26 +97,33 @@ pip3 -m install -U -r requirements.txt
 
 <!-- USAGE EXAMPLES -->
 ## Usage  
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The program consists of three parts. For more information, please refer to the general/each part help.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-Another example to use:
 ```python
-from libraries.dynamics import spread_zombie_dynamics as szd
-from libraries.dynamics import graph_by_default
-import datetime as dt
-import tqdm
-
-G = graph_by_default(nodes = 20)
-ini_date = dt.datetime(year = 2019, month = 8, day = 18)
-dynamic = szd(graph = G, INTIAL_DATE = ini_date)
+python3 main.py -h
+python3 main.py PULP -h
+python3 main.py ILS -h
+python3 main.py ILSgraphics -h
 ```
 
+Typical examples of program use:
+```python
+### PULP
+python3 main.py PULP # Execute PULP algorithm
+python3 main.py PULP -ILS results/output_33229254_greddy4_pert1_ls0_acep0.001.json # Execute PULP algorithm and comparated with best ILS solution 
+
+### ILS
+python3 main.py PULP # Execute ILS algorithm with default parameters. Save results in local directory
+
+### ILSgraphics
+python3 main.py ILSgraphics -dfp results/ -s localSearch.ini z_history.best -sp # Print all important results.
+python3 main.py ILSgraphics -dfp results/best-worse-results/ -s z_history.acceptance acceptance_history -sp # Print results to best-worse solutions.
+python3 main.py ILSgraphics -dfp results/output_34679923_random4_pert1_ls0_acep0.005.json # Print all results to best solution.
+```
 
 <!-- START readme-templates/6-roadmap.md -->
 ## Roadmap  
-See the [open issues](https://github.com/Johansmm/energy-network-optimization/issues) for a list of proposed features (and known issues).<!-- END readme-templates/6-roadmap.md -->
+See the [open issues](https://github.com/TEAM-IMT/energy-network-optimization/issues) for a list of proposed features (and known issues).<!-- END readme-templates/6-roadmap.md -->
 
 <!-- START readme-templates/7-contribution.md -->
 ## Contributing  
@@ -137,12 +137,14 @@ Contributions are what make the open source community such an amazing place to b
 
 <!-- START readme-templates/8-license.md -->
 ## License  
-Distributed under the MIT License. See [`LICENSE`](https://github.com/Johansmm/energy-network-optimization/blob/main/LICENSE) for more information.<!-- END readme-templates/8-license.md -->
+Distributed under the MIT License. See [`LICENSE`](https://github.com/TEAM-IMT/energy-network-optimization/blob/main/LICENSE) for more information.<!-- END readme-templates/8-license.md -->
 
 <!-- START readme-templates/9-contact.md -->
 ## Contact  
-**Johan Mejia:**  <a href="https://www.linkedin.com/in/Johansmm/"> <img src="https://image.flaticon.com/icons/png/512/174/174857.png" width="16" height="16"></a> <a href="mailto:johan-steven.mejia-mogollon@imt-atlantique.net"> <img src="https://image.flaticon.com/icons/png/512/732/732200.png" width="16" height="16"></a> <a href="https://github.com/Johansmm"> <img src="https://image.flaticon.com/icons/png/512/733/733553.png" width="16" height="16"></a><br/>
-**Project Link:**  [https://github.com/Johansmm/energy-network-optimization](https://github.com/Johansmm/energy-network-optimization)<!-- END readme-templates/9-contact.md -->
+* **Johan Mejia** (johan-steven.mejia-mogollon@imt-atlantique.net) - [![Linkend][linkedin-shield]][linkedin-url-1]
+* **Tatiana Moreno** (jenny-tatiana.moreno-perea@imt-atlantique.net) - [![Linkend][linkedin-shield]][linkedin-url-2]
+* **Diego Carreño** (diego-andres.carreno-avila@imt-atlantique.net) - [![Linkend][linkedin-shield]][linkedin-url-3]  
+**Project Link:**  [https://github.com/TEAM-IMT/energy-network-optimization](https://github.com/TEAM-IMT/energy-network-optimization)<!-- END readme-templates/9-contact.md -->
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements  
@@ -153,16 +155,18 @@ Distributed under the MIT License. See [`LICENSE`](https://github.com/Johansmm/e
 <!-- MARKDOWNS AND LINKS -->
 <!-- START readme-templates/links.md -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Johansmm/energy-network-optimization.svg?style=for-the-badge
-[contributors-url]: https://github.com/Johansmm/energy-network-optimization/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Johansmm/energy-network-optimization.svg?style=for-the-badge
-[forks-url]: https://github.com/Johansmm/energy-network-optimization/network/members
-[stars-shield]: https://img.shields.io/github/stars/Johansmm/energy-network-optimization.svg?style=for-the-badge
-[stars-url]: https://github.com/Johansmm/energy-network-optimization/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Johansmm/energy-network-optimization.svg?style=for-the-badge
-[issues-url]: https://github.com/Johansmm/energy-network-optimization/issues
-[license-shield]: https://img.shields.io/github/license/Johansmm/energy-network-optimization.svg?style=for-the-badge
-[license-url]: https://github.com/Johansmm/energy-network-optimization/blob/main/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/TEAM-IMT/energy-network-optimization.svg?style=for-the-badge
+[contributors-url]: https://github.com/TEAM-IMT/energy-network-optimization/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/TEAM-IMT/energy-network-optimization.svg?style=for-the-badge
+[forks-url]: https://github.com/TEAM-IMT/energy-network-optimization/network/members
+[stars-shield]: https://img.shields.io/github/stars/TEAM-IMT/energy-network-optimization.svg?style=for-the-badge
+[stars-url]: https://github.com/TEAM-IMT/energy-network-optimization/stargazers
+[issues-shield]: https://img.shields.io/github/issues/TEAM-IMT/energy-network-optimization.svg?style=for-the-badge
+[issues-url]: https://github.com/TEAM-IMT/energy-network-optimization/issues
+[license-shield]: https://img.shields.io/github/license/TEAM-IMT/energy-network-optimization.svg?style=for-the-badge
+[license-url]: https://github.com/TEAM-IMT/energy-network-optimization/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/Johansmm
+[linkedin-url-1]: https://www.linkedin.com/in/johansmm/
+[linkedin-url-2]: https://www.linkedin.com/in/tatiana-moreno-perea/
+[linkedin-url-3]: https://www.linkedin.com/in/diego-andres-carre%C3%B1o-49b2ab157/
 <!-- END readme-templates/links.md -->
