@@ -1,0 +1,40 @@
+name: Dynamic Readme
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update_templates:
+    name: "Update Templates"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥 Fetching Repository Contents"
+        uses: actions/checkout@main
+
+      - name: "💾 Github Repository Metadata"
+        uses: varunsridharan/action-repository-meta@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: "💫 Dynamic Template Render"
+        uses: varunsridharan/action-dynamic-readme@main
+        if: ${{ github.repository != 'Johansmm/README-Template' }}
+        with:
+          GLOBAL_TEMPLATE_REPOSITORY: Johansmm/Johansmm
+          files: |
+            README.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "💫 Dynamic Template Render in template repository"
+        uses: varunsridharan/action-dynamic-readme@main
+        if: ${{ github.repository == 'Johansmm/README-Template' }}
+        with:
+          GLOBAL_TEMPLATE_REPOSITORY: Johansmm/Johansmm
+          files: |
+            README.md=DEMO-README.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
